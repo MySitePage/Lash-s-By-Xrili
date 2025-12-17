@@ -1,4 +1,5 @@
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +18,7 @@
             --soft-pink: #ffeef5;
             --light-pink: #fdd5e8;
             --medium-pink: #fbb6d9;
-            --image-pink: #ffaad4; /* Exact pink from the image */
+            --image-pink: #ffaad4;
             --dark-pink: #f98ec7;
             --soft-gray: #a9919c;
             --text-dark: #8c7a83;
@@ -1027,7 +1028,7 @@
                             </div>
                         </div>
                         <div class="portfolio-item">
-                            <img src="https://www.dropbox.com/scl/fi/02qchpjowgh8lht5ayse8/IMG_7425.jpeg?rlkey=17gr4femf5xnwtim47pfnxx4z&st=typbql1p&dl=1" alt="Lash client before and after">
+                            <img src="https://i.postimg.cc/tCsrpT11/IMG-7425.jpg" alt="Lash client before and after">
                             <div class="portfolio-overlay">
                                 <p>Natural Set</p>
                             </div>
@@ -1168,7 +1169,7 @@
                 </section>
             </div>
 
-            <!-- Booking Page (Standalone) -->
+            <!-- Booking Page (Standalone) with Getform Integration -->
             <div class="page" id="booking-page">
                 <section class="booking-section">
                     <div class="hero">
@@ -1185,25 +1186,28 @@
                         <h3 class="form-title">Reservation Request</h3>
                         <p class="form-intro">Please fill out this form completely. We'll contact you within 24 hours to confirm your appointment details and provide deposit payment instructions.</p>
                         
-                        <form id="bookingForm">
+                        <!-- Getform Integration - Form submission will go to your email -->
+                        <form id="bookingForm" action="https://getform.io/f/apjxjdga" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="_gotcha" style="display:none !important">
+                            
                             <div class="form-group">
                                 <label class="form-label" for="clientName">Full Name *</label>
-                                <input type="text" id="clientName" class="form-control" required placeholder="Your full name">
+                                <input type="text" id="clientName" name="name" class="form-control" required placeholder="Your full name">
                             </div>
                             
                             <div class="form-group">
                                 <label class="form-label" for="clientPhone">Phone Number *</label>
-                                <input type="tel" id="clientPhone" class="form-control" required placeholder="Phone number for confirmation">
+                                <input type="tel" id="clientPhone" name="phone" class="form-control" required placeholder="Phone number for confirmation">
                             </div>
                             
                             <div class="form-group">
                                 <label class="form-label" for="clientEmail">Email Address</label>
-                                <input type="email" id="clientEmail" class="form-control" placeholder="Optional, for appointment reminders">
+                                <input type="email" id="clientEmail" name="email" class="form-control" placeholder="Optional, for appointment reminders">
                             </div>
                             
                             <div class="form-group">
                                 <label class="form-label" for="serviceType">Service Requested *</label>
-                                <select id="serviceType" class="form-control" required>
+                                <select id="serviceType" name="service" class="form-control" required>
                                     <option value="">Select your desired lash set</option>
                                     <option value="regular">Regular Set - $15 + $5 deposit</option>
                                     <option value="cat-eye">Cat Eye Set - $20 + $5 deposit</option>
@@ -1214,12 +1218,12 @@
                             
                             <div class="form-group">
                                 <label class="form-label" for="preferredDate">Preferred Date *</label>
-                                <input type="date" id="preferredDate" class="form-control" required>
+                                <input type="date" id="preferredDate" name="date" class="form-control" required>
                             </div>
                             
                             <div class="form-group">
                                 <label class="form-label" for="preferredTime">Preferred Time</label>
-                                <select id="preferredTime" class="form-control">
+                                <select id="preferredTime" name="time" class="form-control">
                                     <option value="">Flexible</option>
                                     <option value="morning">Morning (9am-12pm)</option>
                                     <option value="afternoon">Afternoon (12pm-4pm)</option>
@@ -1229,12 +1233,12 @@
                             
                             <div class="form-group">
                                 <label class="form-label" for="specialRequests">Special Requests or Questions</label>
-                                <textarea id="specialRequests" class="form-control" placeholder="Please let us know about any special requests, concerns, or questions before your appointment..."></textarea>
+                                <textarea id="specialRequests" name="requests" class="form-control" placeholder="Please let us know about any special requests, concerns, or questions before your appointment..."></textarea>
                             </div>
                             
                             <div class="form-group">
                                 <label class="form-label" for="howHeard">How did you hear about us?</label>
-                                <select id="howHeard" class="form-control">
+                                <select id="howHeard" name="referral" class="form-control">
                                     <option value="">Select one</option>
                                     <option value="instagram">Instagram</option>
                                     <option value="friend">Friend Referral</option>
@@ -1272,7 +1276,7 @@
                         </form>
                         
                         <div class="form-footer">
-                            <p><i class="fas fa-info-circle" style="margin-right: 5px;"></i> After submitting, we'll contact you within 24 hours to confirm availability and provide deposit payment instructions via Cash App or Apple Pay.</p>
+                            <p><i class="fas fa-info-circle" style="margin-right: 5px;"></i> After submitting, you'll be redirected to a confirmation page. We'll contact you within 24 hours to confirm availability and provide deposit payment instructions.</p>
                             <p style="margin-top: 1rem; font-size: 0.85rem;">Need immediate assistance? DM us on Instagram @lashesbyxrili</p>
                         </div>
                     </div>
@@ -1341,33 +1345,6 @@
                 bookingBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     switchPage('booking');
-                });
-            }
-            
-            // Booking form submission
-            const bookingForm = document.getElementById('bookingForm');
-            if (bookingForm) {
-                bookingForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Get form values
-                    const name = document.getElementById('clientName').value;
-                    const service = document.getElementById('serviceType').value;
-                    const serviceNames = {
-                        'regular': 'Regular Set',
-                        'cat-eye': 'Cat Eye Set',
-                        'natural': 'Natural Set',
-                        'wet': 'Wet Set'
-                    };
-                    
-                    // Show success message
-                    alert(`Thank you, ${name}! Your request for a ${serviceNames[service] || service} has been received. We'll contact you within 24 hours to confirm your appointment and provide deposit payment instructions.`);
-                    
-                    // Reset form
-                    bookingForm.reset();
-                    
-                    // Set default date
-                    setDefaultDate();
                 });
             }
             
